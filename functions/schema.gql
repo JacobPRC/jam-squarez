@@ -1,0 +1,28 @@
+type Account {
+  amount: Int
+  user: User
+}
+
+type User {
+  account: Account
+  squares: [Square]
+  bank_account: Bank_Account
+  name: String
+}
+
+type Square {
+  amount: Int
+  user: User
+}
+
+type Bank_Account {
+  user: User
+  routing_number: Int
+  iban: String
+}
+
+type Query {
+  allUsers: [User!]
+}
+
+# Will probs need to make mutations
