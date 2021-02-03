@@ -1,28 +1,28 @@
 type Account {
   amount: Int
-  user: User
-}
-
-type User {
-  account: Account
-  squares: [Square]
-  bank_account: Bank_Account
-  name: String
+  user: ID
 }
 
 type Square {
   amount: Int
-  user: User
+  name: String
+  user: ID
 }
 
 type Bank_Account {
-  user: User
+  user: ID
+  bank_name: String
   routing_number: Int
   iban: String
 }
 
 type Query {
-  allUsers: [User!]
+  accountByUser(user: ID!): Account!
+  squaresByUser(user: ID!): [Square!]
+  findUsersBankAccount(user: ID!): Bank_Account
 }
 
-# Will probs need to make mutations
+## I don't think I need a user model. The only purpose is to have all of these models nested in
+## a relation. While this is probably a better data model, Fauna is non relational, so it's not necc
+## I can access the user's name from the identity context as well as the id. I can use this to query
+## data by ID, so none of this needs to be relational.
